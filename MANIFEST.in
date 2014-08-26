@@ -1,0 +1,3 @@
+include quickcms/config/deployment.ini_tmpl
+recursive-include quickcms/public *
+recursive-include quickcms/templates *
