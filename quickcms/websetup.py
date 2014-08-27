@@ -4,7 +4,6 @@ import logging
 
 from quickcms.config.environment import load_environment
 from quickcms.model.meta import Session, Base
-from quickcms.model.usuario import Usuario
 from quickcms.model.contenidos import Contenido
 from quickcms.model.auth import *
 
@@ -25,15 +24,34 @@ def setup_app(command, conf, vars):
     u.password = u'test'
     u.email = u'test@example.com'
     Session.add(u)
+
+    u2 = AuthUser()
+    u2.username = u'chafita'
+    u2.password = u'chafita'
+    u2.email = u'chafita@example.com'
+    Session.add(u2)
+
     g = AuthGroup()
     g.name = u'admin'
     g.users.append(u)
     Session.add(g)
+
+    g_usuario=AuthGroup()
+    g_usuario.name = u'usuarios'
+    g_usuario.users.extend([u,u2])
+    Session.add(g_usuario)
+
+    p_ver = AuthPermission()
+    p_ver.name = u'ver'
+    p_ver.groups.append(g_usuario)
+    Session.add(p_ver)
+
     p = AuthPermission()
     p.name = u'edit'
     p.groups.append(g)
     Session.add(p)
     Session.commit()
+
     post = Contenido()
     post.titulo = u"Post de inicio"
     post.texto = u"Lorem ipsum dolor sit amet, consectetur adipiscing elit"

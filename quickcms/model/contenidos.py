@@ -1,10 +1,34 @@
+# -*- coding: utf-8 -*-
 import datetime
+import formencode
 from sqlalchemy import Column, Unicode, UnicodeText, Sequence, ForeignKey, TIMESTAMP
 from sqlalchemy.types import Integer, Unicode, Text
-from quickcms.model.meta import Base
+from quickcms.model.meta import Base, Session
 
 def now():
     return datetime.datetime.now()
+
+class NombreUnico(formencode.validators.String):
+    """Se encarga de validar que el titulo de la entrada sea unico"""
+
+    def _to_python(self,value,state):
+        nombre_valido = Session.query(Contenido).filter_by(titulo=value).first()
+        if nombre_valido is not None:
+            raise formencode.Invalid(
+                "El título ya existe!!!",
+                value,
+                state
+                )
+        else:
+            return value
+
+class FormaNuevoContenido(formencode.Schema):
+    """Se encarga de validar un nuevo contenido"""
+    allow_extra_fields = True
+    filter_extra_fields = True
+    titulo = NombreUnico(not_empty=True)
+    texto = formencode.validators.String(not_empty=True)
+
 
 class Contenido(Base):
     """Representa una entrada en el blog."""

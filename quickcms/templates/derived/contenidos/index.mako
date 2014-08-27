@@ -1,6 +1,6 @@
 <%inherit file="/base/base.mako"/>\
 <%def name="header()">Contenidos:</%def>
-<ul>
+
     %for item in c.contenidos:
         <ul>
             <li>Título: ${item.titulo} </li>
@@ -12,4 +12,4 @@
 
     %endfor
 
-</ul>
+<p><a href="${h.url(controller ='usuarios', action='home')}">Home</a>

@@ -57,7 +57,6 @@ class AuthGroup(Base):
                 autoincrement=True)
     name = Column(Unicode(80), unique=True, nullable=False)
     #created = Column(mysql.DATE())
-
     users = relation('AuthUser', secondary=user_group_table, backref='auth_groups')
 
     def __repr__(self):

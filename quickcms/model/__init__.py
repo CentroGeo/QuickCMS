@@ -1,7 +1,7 @@
 """The application's model objects"""
 from quickcms.model.meta import Session, Base
 from quickcms.model.contenidos import Contenido
-from quickcms.model.usuario import Usuario
+from quickcms.model import *
 
 
 def init_model(engine):

@@ -11,6 +11,14 @@ from quickcms.lib.base import BaseController, render
 log = logging.getLogger(__name__)
 
 class UsuariosController(BaseController):
+    def home(self):
+        """ Redirige a index.mako"""
+        if request.environ.get('repoze.who.identity') is not None:
+            usuario = request.environ.get('repoze.who.identity')['user']
+            grupos = usuario.auth_groups
+            c.nombres_grupos = [g.name for g in grupos]
+
+        return render("/index.mako")
 
     def index(self,id):
         # Return a rendered template
@@ -30,7 +38,7 @@ class UsuariosController(BaseController):
         usuario.username = self.form_result["username"]
         usuario.email = self.form_result["email"]
         usuario.password = self.form_result["password"]
-        group = Session.query(AuthGroup).filter_by(name=u'admin').first()
+        group = Session.query(AuthGroup).filter_by(name=u'usuarios').first()
         group.users.append(usuario)
         Session.add(usuario)
         Session.add(group)
@@ -38,4 +46,4 @@ class UsuariosController(BaseController):
         c.usuario = usuario
         session['flash'] = u"Se agregó el usuario."
         session.save()
-        return render("/derived/usuario/index.mako")
+        return render("/index.mako")
