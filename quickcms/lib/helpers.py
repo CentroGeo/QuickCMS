@@ -15,3 +15,5 @@ from webhelpers.html.tools import button_to
 from formbuild.helpers import checkbox_group
 from webhelpers.containers import *
 from webhelpers.html import literal
+from webhelpers.pylonslib import Flash as _Flash
+flash = _Flash()

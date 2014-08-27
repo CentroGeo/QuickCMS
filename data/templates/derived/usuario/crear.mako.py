@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1409075531.983
+_modified_time = 1409099262.142733
 _enable_loop = True
-_template_filename = 'C:\\Users\\alberto.porras\\Documents\\Git\\QuickCMS\\quickcms\\templates/derived/usuario/crear.mako'
+_template_filename = '/home/plablo/git/QuickCMS/quickcms/templates/derived/usuario/crear.mako'
 _template_uri = '/derived/usuario/crear.mako'
 _source_encoding = 'utf-8'
 from markupsafe import escape
@@ -35,9 +35,11 @@ def render_body(context,**pageargs):
         __M_writer(u'\n\n')
         __M_writer(escape(h.form_start(url(controller="usuarios",action="guardar_usuario"))))
         __M_writer(u'\n  Nombre de usuario:\n  ')
-        __M_writer(escape(h.text(name='nombre_usuario')))
+        __M_writer(escape(h.text(name='username')))
         __M_writer(u' <br />\n  Correo electr\xf3nico:\n  ')
         __M_writer(escape(h.text(name='email')))
+        __M_writer(u' <br />\n  Contrase\xf1a:\n  ')
+        __M_writer(escape(h.password(name='password')))
         __M_writer(u' <br />\n  ')
         __M_writer(escape(h.submit(value='Guardar', name='commit')))
         __M_writer(u'\n')
@@ -60,6 +62,6 @@ def render_header(context):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "utf-8", "line_map": {"34": 2, "35": 3, "36": 5, "37": 5, "38": 7, "39": 7, "40": 9, "41": 9, "42": 10, "43": 10, "44": 11, "45": 11, "51": 3, "55": 3, "27": 0, "61": 55}, "uri": "/derived/usuario/crear.mako", "filename": "C:\\Users\\alberto.porras\\Documents\\Git\\QuickCMS\\quickcms\\templates/derived/usuario/crear.mako"}
+{"source_encoding": "utf-8", "line_map": {"34": 2, "35": 3, "36": 5, "37": 5, "38": 7, "39": 7, "40": 9, "41": 9, "42": 11, "43": 11, "44": 12, "45": 12, "46": 13, "47": 13, "53": 3, "57": 3, "27": 0, "63": 57}, "uri": "/derived/usuario/crear.mako", "filename": "/home/plablo/git/QuickCMS/quickcms/templates/derived/usuario/crear.mako"}
 __M_END_METADATA
 """

@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1409077635.119
+_modified_time = 1409099358.397031
 _enable_loop = True
-_template_filename = 'C:\\Users\\alberto.porras\\Documents\\Git\\QuickCMS\\quickcms\\templates/derived/usuario/index.mako'
+_template_filename = '/home/plablo/git/QuickCMS/quickcms/templates/derived/usuario/index.mako'
 _template_uri = '/derived/usuario/index.mako'
 _source_encoding = 'utf-8'
 from markupsafe import escape
@@ -31,7 +31,7 @@ def render_body(context,**pageargs):
         c = context.get('c', UNDEFINED)
         __M_writer = context.writer()
         __M_writer(u'\nNombre de usuario: ')
-        __M_writer(escape(c.usuario.nombre_usuario))
+        __M_writer(escape(c.usuario.username))
         __M_writer(u' </br>\nCorreo electr\xf3nico: ')
         __M_writer(escape(c.usuario.email))
         __M_writer(u' </br>\n')
@@ -52,6 +52,6 @@ def render_header(context):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "utf-8", "line_map": {"33": 2, "34": 3, "35": 3, "36": 4, "37": 4, "43": 2, "47": 2, "53": 47, "27": 0}, "uri": "/derived/usuario/index.mako", "filename": "C:\\Users\\alberto.porras\\Documents\\Git\\QuickCMS\\quickcms\\templates/derived/usuario/index.mako"}
+{"source_encoding": "utf-8", "line_map": {"33": 2, "34": 3, "35": 3, "36": 4, "37": 4, "43": 2, "47": 2, "53": 47, "27": 0}, "uri": "/derived/usuario/index.mako", "filename": "/home/plablo/git/QuickCMS/quickcms/templates/derived/usuario/index.mako"}
 __M_END_METADATA
 """

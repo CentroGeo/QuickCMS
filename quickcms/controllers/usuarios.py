@@ -5,7 +5,7 @@ from pylons import request, response, session, tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
 from pylons.decorators import validate
 from quickcms.model.meta import Session
-from quickcms.model.usuario import Usuario, FormaNuevoUsuario
+from quickcms.model.auth import AuthUser, FormaNuevoUsuario, AuthGroup
 from quickcms.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
@@ -26,10 +26,14 @@ class UsuariosController(BaseController):
     @validate(schema=FormaNuevoUsuario(), form='crear')
     def guardar_usuario(self):
         """Guarda el nuevo usuario en la base de datos"""
-        usuario = Usuario()
-        usuario.nombre_usuario = self.form_result["nombre_usuario"]
+        usuario = AuthUser()
+        usuario.username = self.form_result["username"]
         usuario.email = self.form_result["email"]
+        usuario.password = self.form_result["password"]
+        group = Session.query(AuthGroup).filter_by(name=u'admin').first()
+        group.users.append(usuario)
         Session.add(usuario)
+        Session.add(group)
         Session.commit()
         c.usuario = usuario
         session['flash'] = u"Se agregó el usuario."

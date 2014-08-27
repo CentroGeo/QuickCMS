@@ -6,6 +6,7 @@ from quickcms.config.environment import load_environment
 from quickcms.model.meta import Session, Base
 from quickcms.model.usuario import Usuario
 from quickcms.model.contenidos import Contenido
+from quickcms.model.auth import *
 
 log = logging.getLogger(__name__)
 
@@ -14,17 +15,29 @@ def setup_app(command, conf, vars):
     # Don't reload the app if it was loaded under the testing environment
     load_environment(conf.global_conf, conf.local_conf)
 
-    # Create the tables if they don't already exist
+    # Drop and Create the tables if they don't already exist
+    Base.metadata.drop_all(checkfirst=True, bind=Session.bind)
     Base.metadata.create_all(bind=Session.bind)
-    usuario = Usuario()
-    usuario.nombre_usuario = u"admin"
-    usuario.email = u"admin@quickCMS.org"
-    Session.add(usuario)
+
+    #usuarios, etc por defecto
+    u = AuthUser()
+    u.username = u'test'
+    u.password = u'test'
+    u.email = u'test@example.com'
+    Session.add(u)
+    g = AuthGroup()
+    g.name = u'admin'
+    g.users.append(u)
+    Session.add(g)
+    p = AuthPermission()
+    p.name = u'edit'
+    p.groups.append(g)
+    Session.add(p)
     Session.commit()
     post = Contenido()
     post.titulo = u"Post de inicio"
     post.texto = u"Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-    post.usuario_id = usuario.id
+    post.usuario_id = u.id
 
     Session.add(post)
     Session.commit()

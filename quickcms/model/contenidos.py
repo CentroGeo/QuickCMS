@@ -7,7 +7,7 @@ def now():
     return datetime.datetime.now()
 
 class Contenido(Base):
-    """Representa a un usuario en la base de datos."""
+    """Representa una entrada en el blog."""
 
     __tablename__ = "contenidos"
 
@@ -16,4 +16,4 @@ class Contenido(Base):
     texto = Column(Text, nullable = False)
     creado = Column(TIMESTAMP(), default=now)
     editado = Column(TIMESTAMP(), default=None)
-    usuario_id = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
+    usuario_id = Column(Integer, ForeignKey('auth_users.id'), nullable=False)
