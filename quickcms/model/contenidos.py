@@ -12,15 +12,30 @@ class NombreUnico(formencode.validators.String):
     """Se encarga de validar que el titulo de la entrada sea unico"""
 
     def _to_python(self,value,state):
-        nombre_valido = Session.query(Contenido).filter_by(titulo=value).first()
-        if nombre_valido is not None:
-            raise formencode.Invalid(
-                "El título ya existe!!!",
-                value,
-                state
-                )
+        if state is not None:
+            if state.cambio:
+                nombre_valido = Session.query(Contenido).filter_by(titulo=value).first()
+                if nombre_valido is not None:
+                    raise formencode.Invalid(
+                        "El título ya existe!!!",
+                        value,
+                        state
+                        )
+                else:
+                    return value
+            else:
+                return value
         else:
-            return value
+            nombre_valido = Session.query(Contenido).filter_by(titulo=value).first()
+            if nombre_valido is not None:
+                raise formencode.Invalid(
+                    "El título ya existe!!!",
+                    value,
+                    state
+                    )
+            else:
+                return value
+
 
 class FormaNuevoContenido(formencode.Schema):
     """Se encarga de validar un nuevo contenido"""

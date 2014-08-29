@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1409163729.649
+_modified_time = 1409267020.25
 _enable_loop = True
-_template_filename = 'C:\\Users\\alberto.porras\\Documents\\Git\\QuickCMS\\quickcms\\templates/derived/contenidos/index.mako'
+_template_filename = 'c:\\git\\QuickCMS\\quickcms\\templates/derived/contenidos/index.mako'
 _template_uri = '/derived/contenidos/index.mako'
 _source_encoding = 'utf-8'
 from markupsafe import escape
@@ -35,7 +35,9 @@ def render_body(context,**pageargs):
         for item in c.contenidos:
             __M_writer(u'        <ul>\r\n            <li>T\xedtulo: ')
             __M_writer(escape(item.titulo))
-            __M_writer(u' </li>\r\n            <li>Usuario: ')
+            __M_writer(u'\r\n              <a href="')
+            __M_writer(escape(h.url(controller ='contenido', action='crear_post',id=item.id)))
+            __M_writer(u'">Editar</a>\r\n            </li>\r\n            <li>Usuario: ')
             __M_writer(escape(item.usuario.username))
             __M_writer(u' </li>\r\n            <li>Creado en: ')
             __M_writer(escape(item.creado))
@@ -62,6 +64,6 @@ def render_header(context):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "utf-8", "line_map": {"34": 2, "35": 4, "36": 5, "37": 6, "38": 6, "39": 7, "40": 7, "41": 8, "42": 8, "43": 9, "44": 9, "45": 14, "46": 15, "47": 15, "53": 2, "57": 2, "27": 0, "63": 57}, "uri": "/derived/contenidos/index.mako", "filename": "C:\\Users\\alberto.porras\\Documents\\Git\\QuickCMS\\quickcms\\templates/derived/contenidos/index.mako"}
+{"source_encoding": "utf-8", "line_map": {"65": 59, "34": 2, "35": 4, "36": 5, "37": 6, "38": 6, "39": 7, "40": 7, "41": 9, "42": 9, "43": 10, "44": 10, "45": 11, "46": 11, "47": 16, "48": 17, "49": 17, "59": 2, "55": 2, "27": 0}, "uri": "/derived/contenidos/index.mako", "filename": "c:\\git\\QuickCMS\\quickcms\\templates/derived/contenidos/index.mako"}
 __M_END_METADATA
 """

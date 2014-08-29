@@ -1,5 +1,5 @@
 import logging
-from pylons import request, response, session, tmpl_context, config, url
+from pylons import request, response, session, tmpl_context as c, config, url
 from pylons.controllers.util import redirect
 
 from quickcms.lib.base import BaseController, render
@@ -13,8 +13,8 @@ class LoginController(BaseController):
         login_counter = request.environ['repoze.who.logins']
         if login_counter > 0:
             flash('Wrong credentials')
-        tmpl_context.login_counter = login_counter
-        tmpl_context.came_from = request.params.get('came_from') or url(controller='usuarios',action='home')
+        c.login_counter = login_counter
+        c.came_from = request.params.get('came_from') or url(controller='usuarios',action='home')
         return render('/derived/usuario/login.mako')
 
     def login_handler(self):
